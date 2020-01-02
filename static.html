@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Ultra low emission</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    .bc{
+        background-color:rgba(2,74,174,0.4);
+    }
+    #hbzn{
+        background: #fc4a1a;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+</style>
+<body background="img/bg2.jpg">
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<!-- 引入 ECharts 文件 -->
+<script src="js/echarts.js"></script>
+
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+<ul class="layui-nav layui-bg-cyan"  style="border: 0px;padding: 0px">
+        <li class="layui-nav-item" >
+            <img src="img/fpi.png" >
+        </li>
+        <li class="layui-nav-item" >
+            <a href="#" style="font-size: 26px;color: white;"> 企业大数据分析平台</a>
+        </li>
+        <li class="layui-nav-item" style="float: right;right: 25px">
+            <a href="">控制台<span class="layui-badge">9</span></a>
+        </li>
+        <li class="layui-nav-item" style="float: right;right: 25px">
+            <a href="">大数据<span class="layui-badge-dot"></span></a>
+        </li>
+        <li class="layui-nav-item" style="float: right;right: 25px">
+            <a href="">监测<span class="layui-badge-dot"></span></a>
+        </li>
+        <li class="layui-nav-item" style="float: right;right: 25px">
+            <a href="#">环保查询</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;">大气环境</a></dd>
+                <dd><a href="javascript:;">厂区排放</a></dd>
+                <dd><a href="javascript:;">环保智能</a></dd>
+            </dl>
+        </li>
+</ul>
+
+<div style="width: 100%;display: flex;" >
+    <div style="width: 25%">
+        <table  class="layui-table" style="border: 0;padding: 0;margin: 0;background: unset;color: white;" id="leftTab">
+            <colgroup>
+                <col width="80">
+                <col width="150">
+                <col>
+            </colgroup>
+            <thead>
+            <tr style="background-color: #009688;">
+                <th style="text-align: left">序号</th>
+                <th style="text-align: left">设备</th>
+                <th style="text-align: right">AQI</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style="text-align: left">1</td>
+                <td style="text-align: left">位号#设备1</td>
+                <td style="text-align: right">189</td>
+            </tr>
+            <tr class="bc">
+                <td style="text-align: left">2</td>
+                <td style="text-align: left">位号#设备2</td>
+                <td style="text-align: right">116</td>
+            </tr>
+            <tr>
+                <td style="text-align: left">3</td>
+                <td style="text-align: left">位号#设备3</td>
+                <td style="text-align: right">189</td>
+            </tr>
+            <tr class="bc">
+                <td style="text-align: left">4</td>
+                <td style="text-align: left">位号#设备4</td>
+                <td style="text-align: right">116</td>
+            </tr>
+            <tr>
+                <td style="text-align: left">5</td>
+                <td style="text-align: left">位号#设备5</td>
+                <td style="text-align: right">189</td>
+            </tr>
+            <tr class="bc">
+                <td style="text-align: left">6</td>
+                <td style="text-align: left">位号#设备6</td>
+                <td style="text-align: right">116</td>
+            </tr>
+            <tr>
+                <td style="text-align: left">7</td>
+                <td style="text-align: left">位号#设备7</td>
+                <td style="text-align: right">189</td>
+            </tr>
+            <tr class="bc">
+                <td style="text-align: left">8</td>
+                <td style="text-align: left">位号#设备8</td>
+                <td style="text-align: right">116</td>
+            </tr>
+            <tr>
+                <td style="text-align: left">9</td>
+                <td style="text-align: left">位号#设备9</td>
+                <td style="text-align: right">189</td>
+            </tr>
+            <tr class="bc">
+                <td style="text-align: left">10</td>
+                <td style="text-align: left">位号#设备10</td>
+                <td style="text-align: right">116</td>
+            </tr>
+            <tr>
+                <td style="text-align: left">11</td>
+                <td style="text-align: left">位号#设备11</td>
+                <td style="text-align: right">189</td>
+            </tr>
+            <tr class="bc">
+                <td style="text-align: left">12</td>
+                <td style="text-align: left">位号#设备12</td>
+                <td style="text-align: right">116</td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="display: flex;">
+            <div id="left1" style="width: 220px;height: 180px"></div>
+            <div id="left2" style="width: 220px;height: 180px"></div>
+        </div>
+    </div>
+
+    <div style="width: 50%;">
+        <!-- 地图 -->
+        <div style="width: 100%;background-image: url(img/factory.jpg);height: 434px;"></div>
+        <!-- 功能区域 -->
+        <div style="width: 100%;text-align: center">
+            <div style="width: 100%;text-align: center;background-color: rgba(2,23,88,0.5);height: 75px;margin: auto;display: flex;">
+                <div style="color: white;font-weight: bold;padding-top: 10px;margin-left: 100px">
+                    <span style="font-size: 20px;">大气环境</span><br><span style="font-size: 16px;">监测系列</span>
+                </div>
+                <div style="color: white;font-weight: bold;padding-top: 10px;margin-left: 100px">
+                    <span style="font-size: 20px;">厂区排放</span><br><span style="font-size: 16px;">监测系列</span>
+                </div>
+                <div style="color: white;font-weight: bold;padding-top: 10px;margin-left: 100px;width: 200px;" id="hbzn">
+                    <span style="font-size: 20px;">环保智能</span><br><span style="font-size: 16px;">分析系列</span>
+                </div>
+            </div>
+        </div>
+        <!-- PM 图标 -->
+        <div style="display: flex;">
+            <div id="pm1" style="width: 200px;height: 220px"></div>
+            <div id="pm2" style="width: 200px;height: 220px"></div>
+            <div id="pm3" style="width: 200px;height: 220px"></div>
+            <div id="pm4" style="width: 200px;height: 220px"></div>
+        </div>
+    </div>
+
+    <div style="width: 25%;text-align: center;" >
+        <span style="color: white;font-size: 20px;font-weight: bolder;margin-top: 10px;margin:auto;">当前空气质量参数</span>
+        <table class="layui-table" lay-skin="nob" style="border: 0;padding: 0;margin: 0;background: unset;color: white;margin-top: 10px">
+            <tbody>
+                <tr>
+                    <td style="text-align: right"><i class="layui-icon layui-icon-engine" style="font-size: 30px; color: #43D0FD;"></i> </td>
+                    <td style="text-align: center;font-size: 20px;">AQI</td>
+                    <td style="text-align: center;font-size: 20px;color: #E2E96A">135</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right"><i class="layui-icon layui-icon-menu-fill" style="font-size: 30px; color: #43D0FD;"></i> </td>
+                    <td style="text-align: center;font-size: 20px;">PM2.5</td>
+                    <td style="text-align: center;font-size: 20px;color: #E2E96A">135</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right"><i class="layui-icon layui-icon-menu-fill" style="font-size: 30px; color: #43D0FD;"></i> </td>
+                    <td style="text-align: center;font-size: 20px;">PM10</td>
+                    <td style="text-align: center;font-size: 20px;color: #E2E96A">135</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right"><i class="layui-icon layui-icon-chart" style="font-size: 30px; color: #43D0FD;"></i> </td>
+                    <td style="text-align: center;font-size: 20px;">NO2</td>
+                    <td style="text-align: center;font-size: 20px;color: #E2E96A">135</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right"><i class="layui-icon layui-icon-chart" style="font-size: 30px; color: #43D0FD;"></i> </td>
+                    <td style="text-align: center;font-size: 20px;">SO2</td>
+                    <td style="text-align: center;font-size: 20px;color: #E2E96A">135</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right"><i class="layui-icon layui-icon-chart" style="font-size: 30px; color: #43D0FD;"></i> </td>
+                    <td style="text-align: center;font-size: 20px;">CO</td>
+                    <td style="text-align: center;font-size: 20px;color: #E2E96A">135</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: center">
+            <div id="right1" style="width: 400px;height: 200px;margin:auto;"></div>
+            <div id="right2" style="width: 400px;height: 200px;margin:auto;"></div>
+        </div>
+    </div>
+</div>
+<!-- left1 -->
+<script>
+    document.documentElement.style.overflow='hidden';
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var left1Chart = echarts.init(document.getElementById('left1'));
+
+        var dataArr = [{
+            value: 98,
+            name: '有组织排放'
+        }];
+        var color = new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+            offset: 0,
+            color: '#E2E96A' // 0% 处的颜色
+        },
+            {
+                offset: 0.17,
+                color: '#E2E96A' // 100% 处的颜色
+            },
+            {
+                offset: 0.9,
+                color: '#E2E96A' // 100% 处的颜色
+            },
+            {
+                offset: 1,
+                color: '#E2E96A' // 100% 处的颜色
+            }
+        ]);
+        var colorSet = [
+            [0.98, color],
+            [1, '#15337C']
+        ];
+        var rich = {
+            white: {
+                fontSize: 16,
+                color: '#fff',
+                fontWeight: '500',
+                padding: [-60, 0, 0, 0]
+            },
+            bule: {
+                fontSize: 28,
+                fontFamily: 'DINBold',
+                color: '#fff',
+                fontWeight: '700',
+                padding: [-55, 0, 0, 0],
+            },
+            radius: {
+                width: 100,
+                height: 50,
+                // lineHeight:80,
+                //  borderWidth: 1,
+                //  borderColor: '#0092F2',
+                fontSize:16,
+                color: '#fff',
+                //   backgroundColor: '#1B215B',
+                //    borderRadius: 20,
+                textAlign: 'center',
+            },
+            size: {
+                height: 110,
+                padding: [0, 0, 0, 0]
+            }
+        }
+        option = {
+            //  backgroundColor: '#0E1327',
+            tooltip: {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+
+            series: [{ //内圆
+                type: 'pie',
+                radius: '85%',
+                center: ['50%', '50%'],
+                z: 0,
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.RadialGradient(.5, .5, 1, [{
+                            offset: 0,
+                            color: 'rgba(17,24,43,0)'
+                        },
+                            {
+                                offset: .5,
+                                // color: '#1E2B57'
+                                color:'rgba(28,42,91,.6)'
+                            },
+                            {
+                                offset: 1,
+                                color: '#141C33',
+                                // color:'rgba(17,24,43,0)'
+                            }
+                        ], false),
+                        label: {
+                            show: false
+                        },
+                        labelLine: {
+                            show: false
+                        }
+                    },
+                },
+                hoverAnimation: false,
+                label: {
+                    show: false,
+                },
+                tooltip: {
+                    show: false
+                },
+                data: [100],
+            },
+                {
+                    type: 'gauge',
+                    name: '外层辅助',
+                    radius: '74%',
+                    startAngle: '225',
+                    endAngle: '-45',
+                    splitNumber: '100',
+                    pointer: {
+                        show: false
+                    },
+                    detail: {
+                        show: false,
+                    },
+                    data: [{
+                        value: 1
+                    }],
+                    // data: [{value: 1, name: 90}],
+                    title: {
+                        show: true,
+                        offsetCenter: [0, 30],
+                        textStyle: {
+                            color: '#fff',
+                            fontStyle: 'normal',
+                            fontWeight: 'normal',
+                            fontFamily: '微软雅黑',
+                            fontSize: 20,
+                        }
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [
+                                [1, '#00FFFF']
+                            ],
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: true,
+                        length: 20,
+                        lineStyle: {
+                            color: '#051932',
+                            width: 0,
+                            type: 'solid',
+                        },
+                    },
+                    axisLabel: {
+                        show: false
+                    }
+                },
+                {
+                    type: 'gauge',
+                    radius: '70%',
+                    startAngle: '225',
+                    endAngle: '-45',
+                    pointer: {
+                        show: false
+                    },
+                    detail: {
+                        formatter: function(value) {
+                            var num = Math.round(value);
+                            return '{bule|' + num + '}{white|%}' + '{size|' + '}\n{radius|有组织排放}';
+                        },
+                        rich: rich,
+                        "offsetCenter": ['0%', "0%"],
+                    },
+                    data: dataArr,
+                    title: {
+                        show: false,
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: colorSet,
+                            //  width: 25,
+                            // shadowBlur: 15,
+                            // shadowColor: '#B0C4DE',
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 0,
+                            opacity: 1
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false,
+                        length: 25,
+                        lineStyle: {
+                            color: '#00377a',
+                            width: 2,
+                            type: 'solid',
+                        },
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                },
+                {
+                    name: '灰色内圈', //刻度背景
+                    type: 'gauge',
+                    z: 2,
+                    radius: '60%',
+                    startAngle: '225',
+                    endAngle: '-45',
+                    //center: ["50%", "75%"], //整体的位置设置
+                    axisLine: { // 坐标轴线
+                        lineStyle: { // 属性lineStyle控制线条样式
+                            color: [
+                                [1, '#018DFF']
+                            ],
+                            width: 2,
+                            opacity: 1, //刻度背景宽度
+                        }
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    // data: [{
+                    //     show: false,
+                    //     value: '80'
+                    // }], //作用不清楚
+                    axisLabel: {
+                        show: false
+                    },
+                    pointer: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    detail: {
+                        show: 0
+                    }
+                },
+                {
+                    name: "白色圈刻度",
+                    type: "gauge",
+                    radius: "60%",
+                    startAngle: 225, //刻度起始
+                    endAngle: -45, //刻度结束
+                    z: 4,
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        length: 16, //刻度节点线长度
+                        lineStyle: {
+                            width: 2,
+                            color: 'rgba(1,244,255, 0.9)'
+                        } //刻度节点线
+                    },
+                    axisLabel: {
+                        color: 'rgba(255,255,255,0)',
+                        fontSize: 12,
+                    }, //刻度节点文字颜色
+                    pointer: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            opacity: 0
+                        }
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data: [{
+                        value: 0,
+                        name: ""
+                    }]
+                },
+                { //内圆
+                    type: 'pie',
+                    radius: '56%',
+                    center: ['50%', '50%'],
+                    z: 1,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.RadialGradient(.5, .5, .8, [{
+                                offset: 0,
+                                color: '#4978EC'
+                            },
+                                {
+                                    offset: .5,
+                                    color: '#1E2B57'
+                                },
+                                {
+                                    offset: 1,
+                                    color: '#141F3D'
+                                }
+                            ], false),
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            }
+                        },
+                    },
+                    hoverAnimation: false,
+                    label: {
+                        show: false,
+                    },
+                    tooltip: {
+                        show: false
+                    },
+                    data: [100],
+                },
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        left1Chart.setOption(option);
+    });
+</script>
+
+<!-- left2 -->
+<script>
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var left2Chart = echarts.init(document.getElementById('left2'));
+
+        var dataArr = [{
+            value: 76,
+            name: '无组织排放'
+        }];
+        var color = new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+            offset: 0,
+            color: '#5CF9FE' // 0% 处的颜色
+        },
+            {
+                offset: 0.17,
+                color: '#468EFD' // 100% 处的颜色
+            },
+            {
+                offset: 0.9,
+                color: '#468EFD' // 100% 处的颜色
+            },
+            {
+                offset: 1,
+                color: '#5CF9FE' // 100% 处的颜色
+            }
+        ]);
+        var colorSet = [
+            [0.73, color],
+            [1, '#15337C']
+        ];
+        var rich = {
+            white: {
+                fontSize: 16,
+                color: '#fff',
+                fontWeight: '500',
+                padding: [-60, 0, 0, 0]
+            },
+            bule: {
+                fontSize: 28,
+                fontFamily: 'DINBold',
+                color: '#fff',
+                fontWeight: '700',
+                padding: [-55, 0, 0, 0],
+            },
+            radius: {
+                width: 100,
+                height: 50,
+                // lineHeight:80,
+                //  borderWidth: 1,
+                //  borderColor: '#0092F2',
+                fontSize:16,
+                color: '#fff',
+                //   backgroundColor: '#1B215B',
+                //    borderRadius: 20,
+                textAlign: 'center',
+            },
+            size: {
+                height: 110,
+                padding: [0, 0, 0, 0]
+            }
+        }
+        option = {
+            //  backgroundColor: '#0E1327',
+            tooltip: {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+
+            series: [{ //内圆
+                type: 'pie',
+                radius: '85%',
+                center: ['50%', '50%'],
+                z: 0,
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.RadialGradient(.5, .5, 1, [{
+                            offset: 0,
+                            color: 'rgba(17,24,43,0)'
+                        },
+                            {
+                                offset: .5,
+                                // color: '#1E2B57'
+                                color:'rgba(28,42,91,.6)'
+                            },
+                            {
+                                offset: 1,
+                                color: '#141C33',
+                                // color:'rgba(17,24,43,0)'
+                            }
+                        ], false),
+                        label: {
+                            show: false
+                        },
+                        labelLine: {
+                            show: false
+                        }
+                    },
+                },
+                hoverAnimation: false,
+                label: {
+                    show: false,
+                },
+                tooltip: {
+                    show: false
+                },
+                data: [100],
+            },
+                {
+                    type: 'gauge',
+                    name: '外层辅助',
+                    radius: '74%',
+                    startAngle: '225',
+                    endAngle: '-45',
+                    splitNumber: '100',
+                    pointer: {
+                        show: false
+                    },
+                    detail: {
+                        show: false,
+                    },
+                    data: [{
+                        value: 1
+                    }],
+                    // data: [{value: 1, name: 90}],
+                    title: {
+                        show: true,
+                        offsetCenter: [0, 30],
+                        textStyle: {
+                            color: '#fff',
+                            fontStyle: 'normal',
+                            fontWeight: 'normal',
+                            fontFamily: '微软雅黑',
+                            fontSize: 20,
+                        }
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [
+                                [1, '#00FFFF']
+                            ],
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: true,
+                        length: 20,
+                        lineStyle: {
+                            color: '#051932',
+                            width: 0,
+                            type: 'solid',
+                        },
+                    },
+                    axisLabel: {
+                        show: false
+                    }
+                },
+                {
+                    type: 'gauge',
+                    radius: '70%',
+                    startAngle: '225',
+                    endAngle: '-45',
+                    pointer: {
+                        show: false
+                    },
+                    detail: {
+                        formatter: function(value) {
+                            var num = Math.round(value);
+                            return '{bule|' + num + '}{white|%}' + '{size|' + '}\n{radius|无组织排放}';
+                        },
+                        rich: rich,
+                        "offsetCenter": ['0%', "0%"],
+                    },
+                    data: dataArr,
+                    title: {
+                        show: false,
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: colorSet,
+                            //  width: 25,
+                            // shadowBlur: 15,
+                            // shadowColor: '#B0C4DE',
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 0,
+                            opacity: 1
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false,
+                        length: 25,
+                        lineStyle: {
+                            color: '#00377a',
+                            width: 2,
+                            type: 'solid',
+                        },
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                },
+                {
+                    name: '灰色内圈', //刻度背景
+                    type: 'gauge',
+                    z: 2,
+                    radius: '60%',
+                    startAngle: '225',
+                    endAngle: '-45',
+                    //center: ["50%", "75%"], //整体的位置设置
+                    axisLine: { // 坐标轴线
+                        lineStyle: { // 属性lineStyle控制线条样式
+                            color: [
+                                [1, '#018DFF']
+                            ],
+                            width: 2,
+                            opacity: 1, //刻度背景宽度
+                        }
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    // data: [{
+                    //     show: false,
+                    //     value: '80'
+                    // }], //作用不清楚
+                    axisLabel: {
+                        show: false
+                    },
+                    pointer: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    detail: {
+                        show: 0
+                    }
+                },
+                {
+                    name: "白色圈刻度",
+                    type: "gauge",
+                    radius: "60%",
+                    startAngle: 225, //刻度起始
+                    endAngle: -45, //刻度结束
+                    z: 4,
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        length: 16, //刻度节点线长度
+                        lineStyle: {
+                            width: 2,
+                            color: 'rgba(1,244,255, 0.9)'
+                        } //刻度节点线
+                    },
+                    axisLabel: {
+                        color: 'rgba(255,255,255,0)',
+                        fontSize: 12,
+                    }, //刻度节点文字颜色
+                    pointer: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            opacity: 0
+                        }
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data: [{
+                        value: 0,
+                        name: ""
+                    }]
+                },
+                { //内圆
+                    type: 'pie',
+                    radius: '56%',
+                    center: ['50%', '50%'],
+                    z: 1,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.RadialGradient(.5, .5, .8, [{
+                                offset: 0,
+                                color: '#4978EC'
+                            },
+                                {
+                                    offset: .5,
+                                    color: '#1E2B57'
+                                },
+                                {
+                                    offset: 1,
+                                    color: '#141F3D'
+                                }
+                            ], false),
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            }
+                        },
+                    },
+                    hoverAnimation: false,
+                    label: {
+                        show: false,
+                    },
+                    tooltip: {
+                        show: false
+                    },
+                    data: [100],
+                },
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        left2Chart.setOption(option);
+    });
+</script>
+
+<!-- c1 -->
+<script>
+
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var pm1Chart = echarts.init(document.getElementById('pm1'));
+
+        var date = [];
+
+        var data = [Math.random() * 100];
+
+        for (var i = 1; i <= 48; i++) {
+
+            date.push(i);
+            var d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            while (d < 0){
+                d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            }
+            data.push(d);
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
+            title: {
+                left: 'left',
+                text: '本区 PM2.5 48小时变化趋势变化',
+                textStyle: {
+                    color:'white',
+                    fontSize:12,
+                },
+                bottom:170
+            },
+            xAxis: {
+                show:false,
+                type: 'category',
+                boundaryGap: false,
+                data:date
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                splitLine:{
+                    show:false
+                }
+            },
+            series: [
+                {
+                    name:'模拟数据',
+                    type:'line',
+                    smooth:true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: 'rgb(255, 70, 131)'
+                    },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(255, 158, 68)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 70, 131)'
+                        }])
+                    },
+                    data: data
+                }
+            ]
+        };
+
+        pm1Chart.setOption(option);
+    });
+</script>
+
+
+<!-- c2 -->
+<script>
+
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var pm2Chart = echarts.init(document.getElementById('pm2'));
+
+        var date = [];
+
+        var data = [Math.random() * 100];
+
+        for (var i = 1; i <= 48; i++) {
+
+            date.push(i);
+            var d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            while (d < 0){
+                d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            }
+            data.push(d);
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
+            title: {
+                left: 'left',
+                text: '市控 PM2.5 48小时变化趋势变化',
+                textStyle: {
+                    color:'white',
+                    fontSize:12,
+                },
+                bottom:170
+            },
+            xAxis: {
+                show:false,
+                type: 'category',
+                boundaryGap: false,
+                data:date
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                splitLine:{
+                    show:false
+                }
+            },
+            series: [
+                {
+                    name:'模拟数据',
+                    type:'line',
+                    smooth:true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: 'rgb(255, 70, 131)'
+                    },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(255, 158, 68)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 70, 131)'
+                        }])
+                    },
+                    data: data
+                }
+            ]
+        };
+
+        pm2Chart.setOption(option);
+    });
+</script>
+
+
+<!-- c3 -->
+<script>
+
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var pm3Chart = echarts.init(document.getElementById('pm3'));
+
+        var date = [];
+
+        var data = [Math.random() * 100];
+
+        for (var i = 1; i <= 48; i++) {
+
+            date.push(i);
+            var d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            while (d < 0){
+                d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            }
+            data.push(d);
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
+            title: {
+                left: 'left',
+                text: '本区 PM2.5 48小时变化趋势变化',
+                textStyle: {
+                    color:'white',
+                    fontSize:12,
+                },
+                bottom:170
+            },
+            xAxis: {
+                show:false,
+                type: 'category',
+                boundaryGap: false,
+                data:date
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                splitLine:{
+                    show:false
+                }
+            },
+            series: [
+                {
+                    name:'模拟数据',
+                    type:'line',
+                    smooth:true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: '#fdbb2d'
+                    },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#22c1c3'
+                        }, {
+                            offset: 1,
+                            color: '#fdbb2d'
+                        }])
+                    },
+                    data: data
+                }
+            ]
+        };
+
+        pm3Chart.setOption(option);
+    });
+</script>
+
+
+<!-- c4 -->
+<script>
+
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var pm4Chart = echarts.init(document.getElementById('pm4'));
+
+        var date = [];
+
+        var data = [Math.random() * 100];
+
+        for (var i = 1; i <= 48; i++) {
+
+            date.push(i);
+            var d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            while (d < 0){
+                d = Math.round((Math.random()-0.5) * 20 + data[i - 1]);
+            }
+            data.push(d);
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
+            title: {
+                left: 'left',
+                text: '市控 PM2.5 48小时变化趋势变化',
+                textStyle: {
+                    color:'white',
+                    fontSize:12,
+                },
+                bottom:170
+            },
+            xAxis: {
+                show:false,
+                type: 'category',
+                boundaryGap: false,
+                data:date
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                splitLine:{
+                    show:false
+                }
+            },
+            series: [
+                {
+                    name:'模拟数据',
+                    type:'line',
+                    smooth:true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: '#fdbb2d'
+                    },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#22c1c3'
+                        }, {
+                            offset: 1,
+                            color: '#fdbb2d'
+                        }])
+                    },
+                    data: data
+                }
+            ]
+        };
+
+        pm4Chart.setOption(option);
+    });
+</script>
+
+
+<!-- r1 -->
+<script>
+
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var r1Chart = echarts.init(document.getElementById('right1'));
+
+        var data = {
+            dataAge: [{
+                name: 'SO2',
+                value: '3'
+            },{
+                name: 'PM2.5',
+                value: '1'
+            }, {
+                name: 'PM10',
+                value: '4'
+            }]
+        };
+        option = {
+           /* grid: {
+                left: '20%'
+            },*/
+            color: ['#2AC9FD', '#76FBC0', '#35C96E', '#FCC708', '#48B188', '#5957C2', '#4A5D73'],
+            series: [
+                {
+                    color: ['#FF8888 ', '#76FBC0', '#FF5511 '],
+                    type: 'pie',
+                    radius: ['60', '90'],
+                    labelLine: {
+                        normal: {
+                            length: 1,
+                            length2: 100,
+                            lineStyle: {
+                                type: 'solid'
+                            }
+                        }
+
+                    },
+                    label: {
+                        normal: {
+                            formatter: (params)=>{
+                                console.log(params);
+                                return '{b| '+params.name+'}  ' + '{c|'+params.percent.toFixed(0)+'%}'
+                            },
+                            borderWidth: 0,
+                            borderRadius: 4,
+                            padding: [0, -86],
+                            height: 50,
+                            fontSize: 13,
+                            align: 'center',
+                            color: '#EE7700 ',
+                            rich: {
+                                b: {
+                                    fontSize: 12,
+                                    lineHeight: 10,
+                                    color: 'white',
+                                    padding: [0, 0, 0, 0]
+                                },
+                                c: {
+                                    fontSize: 20,
+                                    lineHeight:10,
+                                    color: 'orange'
+                                }
+
+                            }
+                        }
+                    },
+                    data: data.dataAge,
+                },
+                {
+                    type: 'pie',
+                    radius: ['95','96'],
+                    data: [100],
+                    label: {
+                        show: false
+                    }
+                },
+                {
+                    type: 'pie',
+                    radius: ['50', '51'],
+                    data: [100],
+                    label: {
+                        show: false
+                    }
+                }
+            ]
+        };
+
+        r1Chart.setOption(option);
+    });
+</script>
+
+
+<!-- r2 -->
+<script>
+
+    $(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var r2Chart = echarts.init(document.getElementById('right2'));
+
+        var data = {
+            dataAge: [ {
+                name: '良',
+                value: '60'
+            }, {
+                name: '严重污染',
+                value: '10'
+            },{
+                name: '中度污染',
+                value: '5'
+            }, {
+                name: '轻度污染',
+                value: '25'
+            }]
+        };
+        option = {
+            /* grid: {
+                 left: '20%'
+             },*/
+            color: ['#4A5D73','#2AC9FD', '#76FBC0', '#35C96E', '#FCC708', '#48B188', '#5957C2' ],
+            series: [
+                {
+                    color: ['#76FBC0', '#FF0000','#43D0FD' ,'#468EFD '],
+                    type: 'pie',
+                    radius: ['60', '90'],
+                    labelLine: {
+                        normal: {
+                            length: 1,
+                            length2: 100,
+                            lineStyle: {
+                                type: 'solid'
+                            }
+                        }
+
+                    },
+                    label: {
+                        normal: {
+                            formatter: (params)=>{
+                                console.log(params);
+                                return '{b| '+params.name+'}  ' + '{c|'+params.percent.toFixed(0)+'%}'
+                            },
+                            borderWidth: 0,
+                            borderRadius: 4,
+                            padding: [0, -86],
+                            height: 50,
+                            fontSize: 13,
+                            align: 'center',
+                            color: '#EE7700 ',
+                            rich: {
+                                b: {
+                                    fontSize: 12,
+                                    lineHeight: 10,
+                                    color: 'white',
+                                    padding: [0, 0, 0, 0]
+                                },
+                                c: {
+                                    fontSize: 20,
+                                    lineHeight:10,
+                                    color: 'orange'
+                                }
+
+                            }
+                        }
+                    },
+                    data: data.dataAge,
+                },
+                {
+                    type: 'pie',
+                    radius: ['95','96'],
+                    data: [100],
+                    label: {
+                        show: false
+                    }
+                },
+                {
+                    type: 'pie',
+                    radius: ['50', '51'],
+                    data: [100],
+                    label: {
+                        show: false
+                    }
+                }
+            ]
+        };
+
+        r2Chart.setOption(option);
+    });
+</script>
+
+</body>
+</html>
